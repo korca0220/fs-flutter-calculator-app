@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/data.dart';
 import '../../presentation/presentation.dart';
 import '../widget/widget.dart';
 
@@ -14,7 +15,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   final CalculatorViewModel _viewModel = CalculatorViewModel(
     FetchCalculatorUseCase(),
     SaveCalculatorUseCase(),
-    Calculator(),
+    CalculatorEntity(),
   );
 
   @override
@@ -33,7 +34,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Calculator'),
       ),
-      body: ValueListenableBuilder<Calculator>(
+      body: ValueListenableBuilder<CalculatorEntity>(
         valueListenable: _viewModel,
         builder: (context, calculator, child) {
           return Column(
@@ -154,12 +155,4 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       await _viewModel.save();
     }
   }
-}
-
-abstract class ICalculatorLocalDataSource {
-  String get key;
-
-  Future<void> setString(String value);
-
-  Future<String?> getString();
 }
