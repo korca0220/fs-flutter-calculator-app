@@ -1,4 +1,6 @@
-import 'package:calculator_domain_starter/data/data.dart';
+import 'package:calculator_domain_starter/domain/entity/calculator.dart';
+import 'package:calculator_domain_starter/domain/use_case/fetch_calculator.dart';
+import 'package:calculator_domain_starter/domain/use_case/save_calculator.dart';
 import 'package:flutter/foundation.dart';
 
 class CalculatorViewModel extends ValueNotifier<CalculatorEntity> {
@@ -16,23 +18,13 @@ class CalculatorViewModel extends ValueNotifier<CalculatorEntity> {
   }
 
   Future<void> save() async {
-    await _saveCalculatorUseCase.execute(value);
+    final params = SaveCalculatorUseCaseParams(entity: value);
+
+    await _saveCalculatorUseCase.execute(params);
   }
 
   void calculate(String buttonText) {
     value.calculate(buttonText);
     notifyListeners();
-  }
-}
-
-class FetchCalculatorUseCase {
-  Future<CalculatorEntity> execute() {
-    return CalculatorRepository(CalculatorDataSource(CalculatorLocalDataSource())).fetch();
-  }
-}
-
-class SaveCalculatorUseCase {
-  Future<void> execute(CalculatorEntity entity) {
-    return CalculatorRepository(CalculatorDataSource(CalculatorLocalDataSource())).save(entity);
   }
 }
