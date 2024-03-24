@@ -1,8 +1,7 @@
+import 'package:calculator_domain_starter/data/data.dart';
+import 'package:calculator_domain_starter/presentation/presentation.dart';
+import 'package:calculator_domain_starter/ui/widget/widget.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/data.dart';
-import '../../presentation/presentation.dart';
-import '../widget/widget.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({super.key});
@@ -20,11 +19,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   @override
   void initState() {
-    super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _viewModel.load();
     });
+    super.initState();
   }
 
   @override
@@ -36,119 +34,166 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       ),
       body: ValueListenableBuilder<CalculatorEntity>(
         valueListenable: _viewModel,
-        builder: (context, calculator, child) {
-          return Column(
-            children: [
-              CalculatorBoard(
-                number: _viewModel.value.result,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: CalculatorButton.complex(
-                      text: 'AC',
-                      onTap: (text) => _perform(text),
+        builder: (context, calculator, child) => Column(
+          children: [
+            CalculatorBoard(
+              number: calculator.result,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: CalculatorButton.complex(
+                    text: 'AC',
+                    onTap: (buttonText) => _perform(
+                      buttonText,
+                      save: true,
                     ),
                   ),
-                  Expanded(
-                    child: CalculatorButton.complex(
-                        text: '+/-', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.complex(
+                    text: '+/-',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.complex(
-                        text: '<', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.complex(
+                    text: '<',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.operator(
-                        text: '/', onTap: (text) => _perform(text)),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '7', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.operator(
+                    text: '/',
+                    operator: calculator.operator,
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '8', onTap: (text) => _perform(text)),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '7',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '9', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '8',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.operator(
-                        text: 'X', onTap: (text) => _perform(text)),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '4', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '9',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '5', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.operator(
+                    text: 'x',
+                    operator: calculator.operator,
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '6', onTap: (text) => _perform(text)),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '4',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.operator(
-                        text: '-', onTap: (text) => _perform(text)),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '1', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '5',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '2', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '6',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '3', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.operator(
+                    text: '-',
+                    operator: calculator.operator,
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.operator(
-                        text: '+', onTap: (text) => _perform(text)),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: CalculatorButton.simple(
-                        text: '0', onTap: (text) => _perform(text)),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '1',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.simple(
-                        text: '.', onTap: (text) => _perform(text)),
+                ),
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '2',
+                    onTap: (buttonText) => _perform(buttonText),
                   ),
-                  Expanded(
-                    child: CalculatorButton.operator(
-                        text: '=', onTap: (text) => _perform(text, save: true)),
-                  )
-                ],
-              ),
-            ],
-          );
-        },
+                ),
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '3',
+                    onTap: (buttonText) => _perform(buttonText),
+                  ),
+                ),
+                Expanded(
+                  child: CalculatorButton.operator(
+                    text: '+',
+                    operator: calculator.operator,
+                    onTap: (buttonText) => _perform(buttonText),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: CalculatorButton.simple(
+                    text: '0',
+                    onTap: (buttonText) => _perform(buttonText),
+                  ),
+                ),
+                Expanded(
+                  child: CalculatorButton.simple(
+                    text: '.',
+                    onTap: (buttonText) => _perform(buttonText),
+                  ),
+                ),
+                Expanded(
+                  child: CalculatorButton.operator(
+                    text: '=',
+                    onTap: (buttonText) => _perform(
+                      buttonText,
+                      save: true,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  void _perform(String buttonText, {bool save = false}) async {
+  Future<void> _perform(
+    String buttonText, {
+    bool save = false,
+  }) async {
     _viewModel.calculate(buttonText);
 
     if (save) {

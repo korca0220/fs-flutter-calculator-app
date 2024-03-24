@@ -1,7 +1,6 @@
+import 'package:calculator_domain_starter/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import './ui/ui.dart';
 
 void main() {
   runApp(const CalculatorApp());

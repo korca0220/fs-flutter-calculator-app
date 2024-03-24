@@ -1,4 +1,4 @@
-# calculator_basic_starter
+# calculator_domain_starter
 
 A new Flutter project.
 

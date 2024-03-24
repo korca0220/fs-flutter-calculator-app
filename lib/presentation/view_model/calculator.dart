@@ -1,23 +1,22 @@
-import 'package:flutter/material.dart';
-
-import '../../data/data_source/data_source.dart';
-import '../../data/repository/repository.dart';
+import 'package:calculator_domain_starter/data/data.dart';
+import 'package:flutter/foundation.dart';
 
 class CalculatorViewModel extends ValueNotifier<CalculatorEntity> {
+  final FetchCalculatorUseCase _fetchCalculatorUseCase;
+  final SaveCalculatorUseCase _saveCalculatorUseCase;
+
   CalculatorViewModel(
-    this.fetchCalculatorUseCase,
-    this.saveCalculatorUseCase,
+    this._fetchCalculatorUseCase,
+    this._saveCalculatorUseCase,
     super.calculator,
   );
-  final FetchCalculatorUseCase fetchCalculatorUseCase;
-  final SaveCalculatorUseCase saveCalculatorUseCase;
 
   Future<void> load() async {
-    value = await fetchCalculatorUseCase.execute();
+    value = await _fetchCalculatorUseCase.execute();
   }
 
   Future<void> save() async {
-    await saveCalculatorUseCase.execute(value);
+    await _saveCalculatorUseCase.execute(value);
   }
 
   void calculate(String buttonText) {
@@ -27,21 +26,13 @@ class CalculatorViewModel extends ValueNotifier<CalculatorEntity> {
 }
 
 class FetchCalculatorUseCase {
-  Future<CalculatorEntity> execute() async {
-    return CalculatorRepository(
-      CalculatorDataSource(
-        CalculatorLocalDataSource(),
-      ),
-    ).fetch();
+  Future<CalculatorEntity> execute() {
+    return CalculatorRepository(CalculatorDataSource(CalculatorLocalDataSource())).fetch();
   }
 }
 
 class SaveCalculatorUseCase {
-  Future<void> execute(CalculatorEntity value) async {
-    CalculatorRepository(
-      CalculatorDataSource(
-        CalculatorLocalDataSource(),
-      ),
-    ).save(value);
+  Future<void> execute(CalculatorEntity entity) {
+    return CalculatorRepository(CalculatorDataSource(CalculatorLocalDataSource())).save(entity);
   }
 }

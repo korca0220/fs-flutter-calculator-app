@@ -1,20 +1,18 @@
-import '../../util/util.dart';
-import '../data_source/data_source.dart';
-import '../model/model.dart';
+import 'package:calculator_domain_starter/data/data.dart';
+import 'package:calculator_domain_starter/util/util.dart';
 
 class CalculatorRepository {
-  CalculatorRepository(
-    this._calculatorDataSource,
-  );
   final CalculatorDataSource _calculatorDataSource;
+
+  CalculatorRepository(this._calculatorDataSource);
+
+  Future<CalculatorEntity> fetch() async {
+    final CalculatorModel model = await _calculatorDataSource.fetch();
+    return model.toEntity();
+  }
 
   Future<void> save(CalculatorEntity entity) {
     return _calculatorDataSource.save(entity.toModel());
-  }
-
-  Future<CalculatorEntity> fetch() async {
-    final model = await _calculatorDataSource.fetch();
-    return model.toEntity();
   }
 }
 

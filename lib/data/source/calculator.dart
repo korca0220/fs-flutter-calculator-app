@@ -1,5 +1,4 @@
-import '../model/model.dart';
-import 'local/local.dart';
+import 'package:calculator_domain_starter/data/data.dart';
 
 class CalculatorDataSource {
   final ICalculatorLocalDataSource _localDataSource;
