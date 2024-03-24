@@ -8,11 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorProvider extends StatelessWidget {
+  final Widget child;
+
   const CalculatorProvider({
     super.key,
     required this.child,
   });
-  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -25,43 +26,35 @@ class CalculatorProvider extends StatelessWidget {
       child: MultiProvider(
         providers: [
           Provider<CalculatorDataSource>(
-            create: (context) => CalculatorDataSource(
-              context.read(),
-            ),
+            create: (context) => CalculatorDataSource(context.read()),
           ),
         ],
         child: MultiProvider(
           providers: [
             Provider<ICalculatorRepository>(
-              create: (context) => CalculatorRepository(
-                context.read(),
-              ),
+              create: (context) => CalculatorRepository(context.read()),
             ),
           ],
           child: MultiProvider(
             providers: [
               Provider<FetchCalculatorUseCase>(
-                create: (context) => FetchCalculatorUseCase(
-                  context.read(),
-                ),
+                create: (context) => FetchCalculatorUseCase(context.read()),
               ),
               Provider<SaveCalculatorUseCase>(
-                create: (context) => SaveCalculatorUseCase(
-                  context.read(),
-                ),
+                create: (context) => SaveCalculatorUseCase(context.read()),
               ),
             ],
             child: MultiProvider(
               providers: [
                 ChangeNotifierProvider<CalculatorViewModel>(
                   create: (context) => CalculatorViewModel(
-                    context.read<FetchCalculatorUseCase>(),
-                    context.read<SaveCalculatorUseCase>(),
+                    context.read(),
+                    context.read(),
                     CalculatorEntity(),
                   ),
-                  child: child,
                 ),
               ],
+              child: child,
             ),
           ),
         ),
