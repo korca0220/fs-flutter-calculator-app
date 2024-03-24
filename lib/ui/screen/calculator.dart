@@ -1,8 +1,8 @@
-import 'package:calculator_domain_starter/data/data.dart';
 import 'package:calculator_domain_starter/domain/domain.dart';
 import 'package:calculator_domain_starter/presentation/presentation.dart';
 import 'package:calculator_domain_starter/ui/widget/widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({super.key});
@@ -12,29 +12,10 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-  final ICalculatorLocalDataSource _calculatorLocalDataSource =
-      CalculatorLocalDataSource();
-  late final CalculatorDataSource _calculatorDataSource =
-      CalculatorDataSource(_calculatorLocalDataSource);
-
-  late final ICalculatorRepository _calculatorRepository =
-      CalculatorRepository(_calculatorDataSource);
-  late final FetchCalculatorUseCase _fetchCalculatorUseCase =
-      FetchCalculatorUseCase(_calculatorRepository);
-
-  late final SaveCalculatorUseCase _saveCalculatorUseCase =
-      SaveCalculatorUseCase(_calculatorRepository);
-
-  late final CalculatorViewModel _viewModel = CalculatorViewModel(
-    _fetchCalculatorUseCase,
-    _saveCalculatorUseCase,
-    CalculatorEntity(),
-  );
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _viewModel.load();
+      await context.read<CalculatorViewModel>().load();
     });
     super.initState();
   }
@@ -47,7 +28,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         title: const Text('Calculator'),
       ),
       body: ValueListenableBuilder<CalculatorEntity>(
-        valueListenable: _viewModel,
+        valueListenable: context.read<CalculatorViewModel>(),
         builder: (context, calculator, child) => Column(
           children: [
             CalculatorBoard(
@@ -208,10 +189,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     String buttonText, {
     bool save = false,
   }) async {
-    _viewModel.calculate(buttonText);
+    context.read<CalculatorViewModel>().calculate(buttonText);
 
     if (save) {
-      await _viewModel.save();
+      await context.read<CalculatorViewModel>().save();
     }
   }
 }
