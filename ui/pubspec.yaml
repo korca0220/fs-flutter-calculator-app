@@ -1,4 +1,4 @@
-name: calculator_domain_starter
+name: calculator_domain_starter_ui
 description: A new Flutter project.
 version: 1.0.0+1
 publish_to: none
@@ -14,14 +14,11 @@ dependencies:
   shared_preferences: 2.2.2
   provider: ^6.1.2
 
-  calculator_domain_starter_domain:
-    path: ./domain
-
   calculator_domain_starter_presentation:
-    path: ./presentation
+    path: ../presentation
 
-  calculator_domain_starter_ui:
-    path: ./ui
+  calculator_domain_starter_domain:
+    path: ../domain
 
 dev_dependencies:
   flutter_lints: 3.0.1

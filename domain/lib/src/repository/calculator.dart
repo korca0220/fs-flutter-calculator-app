@@ -1,4 +1,4 @@
-import 'package:calculator_domain_starter/domain/entity/calculator.dart';
+import '../../domain.dart';
 
 abstract interface class ICalculatorRepository {
   Future<CalculatorEntity> fetch();

@@ -1,5 +1,5 @@
-import 'package:calculator_domain_starter/domain/domain.dart';
-import 'package:calculator_domain_starter/util/use_case.dart';
+import '../../domain.dart';
+import '../util/use_case.dart';
 
 class SaveCalculatorUseCase
     implements IUseCase<void, SaveCalculatorUseCaseParams> {

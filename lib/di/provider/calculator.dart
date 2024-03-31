@@ -1,9 +1,6 @@
 import 'package:calculator_domain_starter/data/data.dart';
-import 'package:calculator_domain_starter/domain/entity/calculator.dart';
-import 'package:calculator_domain_starter/domain/repository/repository.dart';
-import 'package:calculator_domain_starter/domain/use_case/fetch_calculator.dart';
-import 'package:calculator_domain_starter/domain/use_case/save_calculator.dart';
-import 'package:calculator_domain_starter/presentation/presentation.dart';
+import 'package:calculator_domain_starter_domain/domain.dart';
+import 'package:calculator_domain_starter_presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,4 @@
-import 'package:calculator_domain_starter/domain/entity/calculator.dart';
-import 'package:calculator_domain_starter/domain/use_case/fetch_calculator.dart';
-import 'package:calculator_domain_starter/domain/use_case/save_calculator.dart';
+import 'package:calculator_domain_starter_domain/domain.dart';
 import 'package:flutter/foundation.dart';
 
 class CalculatorViewModel extends ValueNotifier<CalculatorEntity> {

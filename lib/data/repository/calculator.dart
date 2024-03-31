@@ -1,5 +1,5 @@
 import 'package:calculator_domain_starter/data/data.dart';
-import 'package:calculator_domain_starter/domain/domain.dart';
+import 'package:calculator_domain_starter_domain/domain.dart';
 
 class CalculatorRepository implements ICalculatorRepository {
   final CalculatorDataSource _calculatorDataSource;

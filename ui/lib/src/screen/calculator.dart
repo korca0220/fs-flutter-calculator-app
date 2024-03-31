@@ -1,8 +1,9 @@
-import 'package:calculator_domain_starter/domain/domain.dart';
-import 'package:calculator_domain_starter/presentation/presentation.dart';
-import 'package:calculator_domain_starter/ui/widget/widget.dart';
+import 'package:calculator_domain_starter_domain/domain.dart';
+import 'package:calculator_domain_starter_presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../ui.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({super.key});
