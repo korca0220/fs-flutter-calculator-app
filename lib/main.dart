@@ -1,4 +1,4 @@
-import 'package:calculator_domain_starter/di/provider/provider.dart';
+import 'package:calculator_domain_starter_di/di.dart';
 import 'package:calculator_domain_starter_ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

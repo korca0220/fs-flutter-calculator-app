@@ -8,6 +8,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  calculator_domain_starter_di:
+    dependency: "direct main"
+    description:
+      path: di
+      relative: true
+    source: path
+    version: "1.0.0+1"
   calculator_domain_starter_domain:
     dependency: "direct main"
     description:
