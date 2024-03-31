@@ -1,4 +1,3 @@
-import 'package:calculator_domain_starter_di/di.dart';
 import 'package:calculator_domain_starter_ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,8 +27,23 @@ class _CalculatorAppState extends State<CalculatorApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CalculatorProvider(
-        child: CalculatorScreen(),
+      home: const CalculatorHome(),
+    );
+  }
+}
+
+class CalculatorHome extends StatelessWidget {
+  const CalculatorHome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Calculator Home'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => ICalculatorRouteTo.calculator(context),
       ),
     );
   }

@@ -19,5 +19,8 @@ dependencies:
   calculator_domain_starter_domain:
     path: ../domain
 
+  calculator_domain_starter_di:
+    path: ../di
+
 dev_dependencies:
   flutter_lints: 3.0.1

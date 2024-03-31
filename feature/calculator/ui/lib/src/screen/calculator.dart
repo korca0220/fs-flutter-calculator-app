@@ -27,6 +27,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Calculator'),
+        leading: const SizedBox.shrink(),
+        leadingWidth: 0,
       ),
       body: ValueListenableBuilder<CalculatorEntity>(
         valueListenable: context.read<CalculatorViewModel>(),
