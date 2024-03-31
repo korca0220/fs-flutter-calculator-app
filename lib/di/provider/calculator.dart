@@ -1,4 +1,4 @@
-import 'package:calculator_domain_starter/data/data.dart';
+import 'package:calculator_domain_starter_data/data.dart';
 import 'package:calculator_domain_starter_domain/domain.dart';
 import 'package:calculator_domain_starter_presentation/presentation.dart';
 import 'package:flutter/material.dart';
