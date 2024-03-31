@@ -13,8 +13,8 @@ dependencies:
   cupertino_icons: 1.0.6
   provider: ^6.1.2
 
-  calculator_domain_starter_ui:
-    path: ../../feature/calculator/ui
+  feature_calculator:
+    path: ../../feature/calculator/target/junewoov
 
 dev_dependencies:
   flutter_lints: 3.0.1
